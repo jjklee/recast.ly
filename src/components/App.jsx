@@ -30,14 +30,19 @@ class App extends React.Component {
 
     this.state = {
       allVideos: exampleVideoData,
-      currentVideo: $('.video-list-entry-title').
+      currentVideo: '',
+      currentVideoTitle: '',
+      currentVideoDescription: ''
     };
+    this.onVideoClick = this.onVideoClick.bind(this);
   }
 
-  onVideoClick() {
-    this.setState({
-      currentVideo:
-     });
+
+  onVideoClick(e) {
+    console.log(e.target.textContent);
+    for (let i = 0; i < this.state.allVideos.length; i++) {
+
+    }
   }
 
   render() {
@@ -50,20 +55,16 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div><h5><em>videoPlayer</em><VideoPlayer video={exampleVideoData[0]}/></h5></div>
+            <div><h5><em>videoPlayer</em><VideoPlayer video={exampleVideoData[3]}/></h5></div>
           </div>
           <div className="col-md-5">
-            <div><h5><em>videoList</em><VideoList videos={exampleVideoData}/></h5></div>
+            <div><h5><em>videoList</em><VideoList videos={exampleVideoData} onVideoClick={this.onVideoClick}/></h5></div>
           </div>
         </div>
       </div>
     );
   }
 
-}
-
-App.prototype.getVideo = function () {
-  return exampleVideoData[random];
 }
 
 export default App;
