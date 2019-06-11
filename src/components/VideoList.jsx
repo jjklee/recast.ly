@@ -1,9 +1,8 @@
-import exampleVideoData from '../data/exampleVideoData.js';
 import VideoListEntry from './VideoListEntry.js';
 
 var VideoList = (props) => (
   <div className="video-list">
-    {exampleVideoData.map(video => 
+    {props.videos.map((video, key)=> 
       <VideoListEntry video={video} />
     )}
   </div>
@@ -21,12 +20,6 @@ var VideoList = (props) => (
 // // `var` declarations will only exist globally where explicitly defined.
 // export default VideoList;
 
-// var VideoList = (props) => (
-//   <div className="video-list">
-//       <img src={exampleVideoData[0].snippet.thumbnails.default.url}></img>
-//       <h5><em>{exampleVideoData[0].snippet.title}</em></h5>
-//   </div>
-// )
 
 
 
