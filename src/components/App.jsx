@@ -12,35 +12,19 @@ class App extends React.Component {
 
     this.state = {
       allVideos: exampleVideoData,
-      currentVideoId: '4ZAEBxGipoA',
-      currentVideoTitle: 'React JS Tutorial for Beginners - 1 - Introduction',
-      currentVideoDescription: 'My website - https://www.thenewboston.com/videos.php Have questions about the tutorial or React? Ask them here ...',
-      currentUrl: 'https://i.ytimg.com/vi/4ZAEBxGipoA/default.jpg'
+      currentVideo: exampleVideoData[0]
     };
-    this.onVideoClick = this.onVideoClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-
-  onVideoClick(video) {
-    console.log(video);
-
+  handleClick(video) {
     this.setState({
-      currentVideoTitle: video.snippet.title,
-      currentVideoId: video.id.videoId,
-      currentVideoDescription: video.snippet.description,
-      currentUrl: video.snippet.thumbnails.default.url
+      currentVideo: video
     });
-
-
-    this.render();
   }
 
-  // clickRender(clickedVideo) {
-  //   $('#videoPlayer').html('');
-  //   var a = return(
-  //     <div><h5><em>videoPlayer</em><VideoPlayer video={clickedVideo}/></h5></div>
-  //   )
-  //   $('#videoPlayer').append(a);
+  // getVideo(query) {
+
   // }
 
   render() {
@@ -53,10 +37,10 @@ class App extends React.Component {
         </nav>
         <div className="row"> 
           <div className="col-md-7" id="videoPlayer">
-            <div><h5><em>videoPlayer</em><VideoPlayer video={this.state}/></h5></div>
+            <div><h5><em>videoPlayer</em><VideoPlayer video={this.state.currentVideo}/></h5></div>
           </div>
           <div className="col-md-5">
-            <div><h5><em>videoList</em><VideoList videos={this.state.allVideos} onVideoClick={this.onVideoClick}/></h5></div>
+            <div><h5><em>videoList</em><VideoList videos={this.state.allVideos} handleClick={this.handleClick}/></h5></div>
           </div>
         </div>
       </div>
