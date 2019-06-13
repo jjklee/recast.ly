@@ -15,6 +15,7 @@ class App extends React.Component {
       currentVideo: exampleVideoData[0]
     };
     this.handleClick = this.handleClick.bind(this);
+    this.getYoutubeVideos = this.getYoutubeVideos.bind(this);
   }
 
   handleClick(video) {
@@ -23,30 +24,43 @@ class App extends React.Component {
     });
   }
 
-  // getVideo(query) {
+  componentDidMount() {
+    this.getYoutubeVideos('react redux');
+  }
 
-  // }
+  getYoutubeVideos(query) {
+    var options = {
+      key: this.props.API_KEY,
+      query: query,
+    };
+
+    this.props.searchYoutube(options, (videos) => {
+      this.setState({
+        videos: videos,
+        currentVideo: video[0]
+      });
+    });
+  }
 
   render() {
     return (
       <div>
-        <nav className="navbar">
+        <nav className="navbar" >
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em><Search /></h5></div>
+            <Search handleSearch={this.getYoutubeVideos}/>
           </div>
         </nav>
         <div className="row"> 
           <div className="col-md-7" id="videoPlayer">
-            <div><h5><em>videoPlayer</em><VideoPlayer video={this.state.currentVideo}/></h5></div>
+            <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <div><h5><em>videoList</em><VideoList videos={this.state.allVideos} handleClick={this.handleClick}/></h5></div>
+            <VideoList videos={this.state.allVideos} handleClick={this.handleClick}/>
           </div>
         </div>
       </div>
     );
   }
-
 }
 
 export default App;
