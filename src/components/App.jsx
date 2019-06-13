@@ -2,6 +2,7 @@ import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 import Search from './Search.js';
 import exampleVideoData from '../data/exampleVideoData.js';
+import searchYoutube from '../lib/searchYouTube.js'
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
@@ -25,7 +26,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getYoutubeVideos('react redux');
+    this.getYoutubeVideos('puppy');
   }
 
   getYoutubeVideos(query) {
@@ -36,8 +37,8 @@ class App extends React.Component {
 
     this.props.searchYoutube(options, (videos) => {
       this.setState({
-        videos: videos,
-        currentVideo: video[0]
+        allVideos: videos,
+        currentVideo: videos[0]
       });
     });
   }
@@ -55,7 +56,10 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.allVideos} handleClick={this.handleClick}/>
+            <VideoList 
+              videos={this.state.allVideos} 
+              handleClick={this.handleClick}
+            />
           </div>
         </div>
       </div>
