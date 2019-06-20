@@ -1,19 +1,20 @@
-var Search = (props) =>  {
-  // debounceSearch = debounce(props.searchFunc, 500);
+
+
+var Search = (props) => {
+    
   return (
     <div className="search-bar form-inline">
       <input 
         className="form-control" 
         type="text" 
-        onChange={(e) => props.handleSearch(e.target.value)}/>
+        // onChange={(e) => props.handleSearch(e.target.value)}/>
+        onChange={(e) => props.handleSearch(e.target.value, debounceSearch)}/>
       <button className="btn hidden-sm-down">
         <span className="glyphicon glyphicon-search"></span>
       </button>
     </div> 
   );
-}
-
-
+};
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declaratiosns will only exist globally where explicitly defined

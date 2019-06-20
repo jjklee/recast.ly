@@ -2,8 +2,8 @@ import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 import Search from './Search.js';
 import exampleVideoData from '../data/exampleVideoData.js';
-import searchYoutube from '../lib/searchYouTube.js'
 
+import _ from 'underscore';
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 
@@ -30,17 +30,20 @@ class App extends React.Component {
   }
 
   getYoutubeVideos(query) {
+    
     var options = {
       key: this.props.API_KEY,
       query: query,
     };
-
-    this.props.searchYoutube(options, (videos) => {
+    
+    var searchYoutube = this.props.searchYoutube(options, (videos) => {
       this.setState({
         allVideos: videos,
         currentVideo: videos[0]
       });
     });
+    debounceSearch = _.debounce(searchYoutube, 500);  
+    debounceSearch();
   }
 
   render() {
