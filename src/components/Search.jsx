@@ -1,14 +1,13 @@
+var Search = ({handleSearch}) => {
+  handleSearch = _.debounce(handleSearch, 500);
 
-
-var Search = (props) => {
-    
   return (
     <div className="search-bar form-inline">
       <input 
         className="form-control" 
         type="text" 
         // onChange={(e) => props.handleSearch(e.target.value)}/>
-        onChange={(e) => props.handleSearch(e.target.value, debounceSearch)}/>
+        onChange={(e) => handleSearch(e.target.value)}/>
       <button className="btn hidden-sm-down">
         <span className="glyphicon glyphicon-search"></span>
       </button>
